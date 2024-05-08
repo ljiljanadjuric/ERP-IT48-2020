@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProdavnicaObuce.Models
 {
@@ -9,6 +10,18 @@ namespace ProdavnicaObuce.Models
 
         [Required]
         public double Cena { get; set; }
+        [NotMapped]
+        public double ProdajnaCena
+        {
+            get
+            {
+                return Math.Round(Cena * 1.15, 2);
+            }
+            private set
+            {
+                ProdajnaCena = value;
+            }
+        }
         [Required]
         public int Kolicina { get; set; }
         [Required]

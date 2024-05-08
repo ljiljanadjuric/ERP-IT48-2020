@@ -1,0 +1,22 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace ProdavnicaObuce.DTOs
+{
+    public class ProizvodDTO
+    {
+        [Required]
+        public string Ime { get; set; } = String.Empty;
+
+        [Required]
+        public double Cena { get; set; }
+        [Required]
+        public double ProdajnaCena { get; set; }
+        [Required]
+        public int Kolicina { get; set; }
+        [Required]
+        public string Boja { get; set; } = String.Empty;
+        [Required]
+        public string Brend { get; set; } = String.Empty;
+    }
+}
