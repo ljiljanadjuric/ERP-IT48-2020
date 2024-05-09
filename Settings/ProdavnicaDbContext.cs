@@ -11,6 +11,7 @@ namespace ProdavnicaObuce.Settings
         public DbSet<Prodaja> Prodaje { get; set; }
         public DbSet<Proizvod> Proizvodi { get; set; }
         public DbSet<StavkaProdaje> StavkeProdaje { get; set; }
+        public DbSet<StavkaPorudzbine> StavkePorudzbine { get; set; }
 
         public ProdavnicaDbContext(DbContextOptions options) : base(options) { }
 

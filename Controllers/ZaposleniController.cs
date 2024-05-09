@@ -26,13 +26,35 @@ namespace ProdavnicaObuce.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("products")]
+        [HttpPost("proizvodi")]
         public async Task<IActionResult> DodajProizvod([FromForm] KreirajProizvodDTO kreirajProizvodDTO)
         {
             if (!int.TryParse(User.Claims.First(c => c.Type == "Id").Value, out int userId))
                 throw new Exception("Bad ID. Logout and login.");
 
             await _zaposleniServis.KreirajProizvod(kreirajProizvodDTO);
+            return Ok();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("dobavljaci")]
+        public async Task<IActionResult> DodajDobavljaca([FromForm] KreirajDobavljacaDTO kreirajdobavljacaDTO)
+        {
+            if (!int.TryParse(User.Claims.First(c => c.Type == "Id").Value, out int userId))
+                throw new Exception("Bad ID. Logout and login.");
+
+            await _zaposleniServis.KreirajDobavljaca(kreirajdobavljacaDTO);
+            return Ok();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("proizvodi")]
+        public async Task<IActionResult> PoruciProizvode(PorudzbinaDTO porudzbina)
+        {
+            if (!int.TryParse(User.Claims.First(c => c.Type == "Id").Value, out int userId))
+                throw new Exception("Bad ID. Logout and login.");
+
+            await _zaposleniServis.PoruciProizvode(porudzbina, userId);
             return Ok();
         }
     }

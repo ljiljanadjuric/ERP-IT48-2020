@@ -10,6 +10,7 @@ namespace ProdavnicaObuce.Interface
         IRepository<Prodaja> Prodaje { get; }
         IRepository<Proizvod> Proizvodi { get; }
         IRepository<StavkaProdaje> StavkeProdaje { get; }
+        IRepository<StavkaPorudzbine> StavkePorudzbine { get; }
         Task Save();
     }
 }

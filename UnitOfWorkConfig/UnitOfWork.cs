@@ -14,7 +14,8 @@ namespace ProdavnicaObuce.UnitOfWorkConfig
         IRepository<Porudzbina> porudzbine,
         IRepository<Prodaja> prodaje,
         IRepository<Proizvod> proizvodi,
-        IRepository<StavkaProdaje> stavkeProdaje )
+        IRepository<StavkaProdaje> stavkeProdaje,
+        IRepository<StavkaPorudzbine> stavkePorudzbine)
         {
             _context = context;
             Korisnici = korisnici;
@@ -23,6 +24,7 @@ namespace ProdavnicaObuce.UnitOfWorkConfig
             Prodaje = prodaje;
             Proizvodi = proizvodi;
             StavkeProdaje = stavkeProdaje;
+            StavkePorudzbine = stavkePorudzbine;
         }
 
         public IRepository<Korisinik> Korisnici { get; }
@@ -31,6 +33,7 @@ namespace ProdavnicaObuce.UnitOfWorkConfig
         public IRepository<Prodaja> Prodaje { get; }
         public IRepository<Proizvod> Proizvodi { get; }
         public IRepository<StavkaProdaje> StavkeProdaje { get; }
+        public IRepository<StavkaPorudzbine> StavkePorudzbine { get; }
 
 
 

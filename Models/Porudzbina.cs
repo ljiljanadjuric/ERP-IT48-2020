@@ -17,5 +17,6 @@ namespace ProdavnicaObuce.Models
         
         public virtual Korisinik? Korisinik { get; set; }
         public virtual Dobavljac? Dobavljac { get; set; }
+        public virtual List<StavkaPorudzbine>? StavkePorudzbine { get; set; }
     }
 }

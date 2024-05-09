@@ -6,5 +6,7 @@ namespace ProdavnicaObuce.Interface
     {
         Task<List<ProizvodDTO>> GetProizvode();
         Task KreirajProizvod(KreirajProizvodDTO kreirajProizvodDTO);
+        Task KreirajDobavljaca(KreirajDobavljacaDTO kreirajDobavljacaDTO);
+        Task PoruciProizvode(PorudzbinaDTO poruciProizvodDTO, int idZaposlenog);
     }
 }
