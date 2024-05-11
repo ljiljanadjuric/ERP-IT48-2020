@@ -8,5 +8,8 @@ namespace ProdavnicaObuce.Interface
         Task KreirajProizvod(KreirajProizvodDTO kreirajProizvodDTO);
         Task KreirajDobavljaca(KreirajDobavljacaDTO kreirajDobavljacaDTO);
         Task PoruciProizvode(PorudzbinaDTO poruciProizvodDTO, int idZaposlenog);
+        public Task<List<PorudzbinaStanjeDTO>> PregledajSvePorudzbine();
+        public Task<List<PorudzbinaStanjeDTO>> PregledajPorudzbineKojeCekajuDaSePreuzmu();
+        public Task PreuzmiPorudzbinu(int idPorudzbine);
     }
 }

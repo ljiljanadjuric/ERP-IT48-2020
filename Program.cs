@@ -49,6 +49,7 @@ builder.Services.AddSwaggerGen(c => {
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAutorizacijaServis, AutorizacijaServis>();
 builder.Services.AddScoped<IZaposleniServis, ZaposleniServis>();
+builder.Services.AddScoped<IKlijentServis, KlijentServis>();
 
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

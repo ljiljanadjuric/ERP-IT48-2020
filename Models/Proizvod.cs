@@ -30,6 +30,7 @@ namespace ProdavnicaObuce.Models
         public string Brend { get; set; } = String.Empty;
 
         public virtual List<StavkaProdaje>? StavkeProdaje { get; set; }
+        public virtual List<StavkaPorudzbine>? StavkePorudzbine { get; set; }
 
 
     }

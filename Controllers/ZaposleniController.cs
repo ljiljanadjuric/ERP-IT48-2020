@@ -25,6 +25,22 @@ namespace ProdavnicaObuce.Controllers
             return Ok(proizvodi);
         }
 
+        [HttpGet("porudzbine")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PregledajSvePorudzbine()
+        {
+            var porudzbine = await _zaposleniServis.PregledajSvePorudzbine();
+            return Ok(porudzbine);
+        }
+
+        [HttpGet("porudzbine-za-prijem")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PregledajPorudzbineKojeCekajuDaSePreuzmu()
+        {
+            var porudzbine = await _zaposleniServis.PregledajPorudzbineKojeCekajuDaSePreuzmu();
+            return Ok(porudzbine);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost("proizvodi")]
         public async Task<IActionResult> DodajProizvod([FromForm] KreirajProizvodDTO kreirajProizvodDTO)
@@ -55,6 +71,14 @@ namespace ProdavnicaObuce.Controllers
                 throw new Exception("Bad ID. Logout and login.");
 
             await _zaposleniServis.PoruciProizvode(porudzbina, userId);
+            return Ok();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("porudzbine")]
+        public async Task<IActionResult> PreuzmiPorudzbinu(int idPorudzbine)
+        {
+            await _zaposleniServis.PreuzmiPorudzbinu(idPorudzbine);
             return Ok();
         }
     }

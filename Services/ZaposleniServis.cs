@@ -52,10 +52,8 @@ namespace ProdavnicaObuce.Services
                 {
                     throw new Exception("Proizvod ne postoji!");
                 }
-                proizvod.Kolicina += stavkaPorudzbine.Kolicina;
                 proizvodi.Add(proizvod);
             }
-            await _unitOfWork.Proizvodi.Save();
             porudzbina.StavkePorudzbine.ForEach(s => s.IdPorudzbine = porudzbina.Id);
             porudzbina.VremePorudzbe = DateTime.Now;
             porudzbina.VremeDostave = DateTime.Now.AddHours(3);
@@ -66,5 +64,47 @@ namespace ProdavnicaObuce.Services
             await _unitOfWork.Porudzbine.Insert(porudzbina);
             await _unitOfWork.Save();
         }
+
+        public async Task<List<PorudzbinaStanjeDTO>> PregledajPorudzbineKojeCekajuDaSePreuzmu()
+        {
+            var poruzbine = await _unitOfWork.Porudzbine.GetAll();
+            return _mapper.Map<List<PorudzbinaStanjeDTO>>(poruzbine.Where(p => p.Status == "Naruceno" && DateTime.Now > p.VremeDostave));
+        }
+
+        public async Task<List<PorudzbinaStanjeDTO>> PregledajSvePorudzbine()
+        {
+            var poruzbine = await _unitOfWork.Porudzbine.GetAll();
+            return _mapper.Map<List<PorudzbinaStanjeDTO>>(poruzbine);
+        }
+
+        public async Task PreuzmiPorudzbinu(int idPorudzbine)
+        {
+            var porudzbina = await _unitOfWork.Porudzbine.GetById(idPorudzbine);
+            if(porudzbina == null)
+            {
+                throw new Exception("Porudzbina ne postoji!");
+            }
+            if(porudzbina.Status == "Preuzeta")
+            {
+                throw new Exception("Porudzbina je vec prezueta!");
+            }
+            if(DateTime.Now < porudzbina.VremeDostave)
+            {
+                throw new Exception("Porudzbina jos nije spremna za preuzimanje!");
+            }
+            foreach (var stavkaPorudzbine in porudzbina.StavkePorudzbine)
+            {
+                Proizvod proizvod = await _unitOfWork.Proizvodi.GetById(stavkaPorudzbine.IdProizvoda);
+                if (proizvod == null)
+                {
+                    throw new Exception("Proizvod ne postoji!");
+                }
+                proizvod.Kolicina += stavkaPorudzbine.Kolicina;
+            }
+            porudzbina.Status = "Preuzeta";
+            await _unitOfWork.Proizvodi.Save();
+            await _unitOfWork.Save();
+        }
+
     }
 }
