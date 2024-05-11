@@ -7,11 +7,11 @@ namespace ProdavnicaObuce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AutorizacijaKontroler : ControllerBase
+    public class AutorizacijaController : ControllerBase
     {
         IAutorizacijaServis _autorizacijaServis;
 
-        public AutorizacijaKontroler(IAutorizacijaServis autorizacijaServis)
+        public AutorizacijaController(IAutorizacijaServis autorizacijaServis)
         {
             _autorizacijaServis = autorizacijaServis;
         }
