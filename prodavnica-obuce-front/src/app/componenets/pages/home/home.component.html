@@ -1,0 +1,33 @@
+<h1>Proizvodi</h1>
+  
+<div class="card-container">
+  
+    <mat-card class="example-card" appearance="outlined" *ngFor="let proizvod of filteredProducts">
+        <mat-card-header>
+          <mat-card-title>{{proizvod.ime}}</mat-card-title>
+          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <img mat-card-image [src]="'/images/img1.webp'" >
+        <mat-card-content>
+            <div class="cena">Cena: {{ proizvod.prodajnaCena }} RSD</div>
+            <h3>Brend proizvoda: {{ proizvod.brend}}</h3>
+        </mat-card-content>
+        <mat-card-actions>
+            <a [routerLink]="['/api/Proizvod', proizvod.id]">
+                <div class="example-button-container">
+                    <button mat-fab extended>
+                        <mat-icon>info</mat-icon>
+                        Vise detalja
+                    </button>
+                </div>
+            </a>
+        </mat-card-actions>
+      </mat-card>
+</div>
+
+<mat-paginator [length]="products.length"
+                [pageSize]="5"
+                [pageSizeOptions]="[5,10,25,50]"
+                (page)="onPageChange($event)">
+</mat-paginator>

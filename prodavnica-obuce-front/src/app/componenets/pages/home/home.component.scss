@@ -1,0 +1,16 @@
+.example-card {
+    max-width: 400px;
+  }
+
+
+.example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 140px;
+}

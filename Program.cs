@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
+builder.Services.AddCors();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -88,6 +88,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors(
+       x => x.WithOrigins("http://localhost:4200")
+             .WithMethods("HEAD", "GET", "POST", "PUT", "DELETE")
+             .AllowAnyHeader()
+     );
 
 app.MapControllers();
 
