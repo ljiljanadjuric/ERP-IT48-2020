@@ -18,15 +18,15 @@ namespace ProdavnicaObuce.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginDTO loginDTO)
         {
-            var token = await _autorizacijaServis.Login(loginDTO);
-            return Ok(token);
+            var response = await _autorizacijaServis.Login(loginDTO);
+            return Ok(response);
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm] RegisterDTO registerDTO)
+        public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
             await _autorizacijaServis.Register(registerDTO);
             return Ok();

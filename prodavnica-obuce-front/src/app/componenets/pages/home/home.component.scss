@@ -1,7 +1,14 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 2rem;
+}
+
 .example-card {
     max-width: 400px;
+    margin: 2rem 0px;
   }
-
 
 .example-flex-container {
     display: flex;

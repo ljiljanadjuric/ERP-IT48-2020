@@ -1,0 +1,33 @@
+<mat-card appearance="outlined" class="example-card">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div>
+                <mat-form-field>
+                 <input type="text" matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+
+                <div class="error" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+                    <span *ngIf="form.controls['email'].errors?.['required']">Email is required.</span>
+                    <span *ngIf="form.controls['email'].errors?.['email']">Wrong format.</span>
+                 </div>
+            </div>
+
+            
+            <div>
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Password" formControlName="sifra">
+                </mat-form-field>
+
+                <div class="error" *ngIf="form.controls['sifra'].invalid && form.controls['sifra'].touched">
+                    <span *ngIf="form.controls['sifra'].errors?.['required']">Password is required.</span>
+                 </div>
+            </div>
+
+            <div class="button">
+                <button type="submit" mat-button>Login</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>

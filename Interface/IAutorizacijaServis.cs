@@ -6,6 +6,6 @@ namespace ProdavnicaObuce.Interface
     {
         public Task Register(RegisterDTO registerDTO);
 
-        public Task<string> Login(LoginDTO loginDTO);
+        public Task<LoginResponseDto> Login(LoginDTO loginDTO);
     }
 }

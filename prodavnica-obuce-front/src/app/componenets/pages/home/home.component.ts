@@ -4,7 +4,7 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
 import { Proizvod } from '../../../models/Proizvod';
 import { Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
-import { ProductService } from '../../../services/prooduct/product.service';
+import { ProductService } from '../../../services/product/product.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

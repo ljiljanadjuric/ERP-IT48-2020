@@ -1,0 +1,26 @@
+.example-card {
+    margin: auto;
+    width: 33%;
+    margin-top: 100px;
+  }
+  
+  mat-card-title {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .error {
+    color: red;
+    font-size: 16px;
+    margin: 4px 0px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }

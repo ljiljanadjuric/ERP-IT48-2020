@@ -50,7 +50,7 @@ namespace ProdavnicaObuce.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<string> Login(LoginDTO loginDTO)
+        public async Task<LoginResponseDto> Login(LoginDTO loginDTO)
         {
             var korisnici = await _unitOfWork.Korisnici.GetAll();
             var korisnik = korisnici
@@ -61,7 +61,11 @@ namespace ProdavnicaObuce.Services
 
             if (!BC.BCrypt.Verify(loginDTO.Sifra, korisnik.Sifra))
                 throw new Exception("Invalid password");
-            return GetToken(korisnik);
+            var token = GetToken(korisnik);
+            return new LoginResponseDto
+            {
+                Token = token
+            };
         }
     }
 }
