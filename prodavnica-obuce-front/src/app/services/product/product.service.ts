@@ -11,10 +11,14 @@ export class ProductService {
   private baseUri='https://localhost:4430';
   constructor(private httpClient:HttpClient) { }
 
-  getProizvodi():Observable<Proizvod[]>
-  {
+  getProizvodi():Observable<Proizvod[]> {
     return this.httpClient.get<Proizvod[]>(this.baseUri+'/api/Klijent/products');
   }
+
+  getFiltriraniProizvodi(searchText: string):Observable<Proizvod[]> {
+    return this.httpClient.get<Proizvod[]>(this.baseUri+'/api/Klijent/filtirrani-proizvodi?brend=' + searchText);
+  }
+
   getProizvod(idProizvoda: number): Observable<Proizvod>{
     return this.httpClient.get<Proizvod>(this.baseUri+'/api/Proizvod/'+idProizvoda)
   }
