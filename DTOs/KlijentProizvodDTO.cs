@@ -4,6 +4,7 @@ namespace ProdavnicaObuce.DTOs
 {
     public class KlijentProizvodDTO
     {
+        public int Id { get; set; }
         [Required]
         public string Ime { get; set; } = String.Empty;
         [Required]

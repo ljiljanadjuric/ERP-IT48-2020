@@ -32,6 +32,7 @@ export class SignInComponent {
         {
           next: (response: any) => {
             this.authService.saveToken(response.token);
+            window.location.href = '/'
           },
           error: (err) => {
             console.log(err)

@@ -1,18 +1,30 @@
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
+    <a [routerLink]="'/'" >
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>home</mat-icon>
+        </button>
+    </a>
     <span>Prodavnica obuce</span>
     <span class="example-spacer"></span>
-    <a [routerLink]="'/sign-in'">
+    <a [routerLink]="'/sign-in'" *ngIf="!isLogged">
         <button mat-icon-button aria-label="Sign in" matTooltip="Login">
         <mat-icon>login</mat-icon>
         </button>
     </a>
-    <a [routerLink]="'sign-up'">
+    <a [routerLink]="'sign-up'" *ngIf="!isLogged">
         <button mat-icon-button aria-label="Register" matTooltip="Register">
         <mat-icon>app_registration</mat-icon>
         </button>
     </a>
+    <a [routerLink]="'cart'" *ngIf="isLogged">
+        <button mat-icon-button aria-label="Car" matTooltip="Cart">
+        <mat-icon>shopping_cart</mat-icon>
+        </button>
+    </a>
+    <span *ngIf="isLogged">
+        <button mat-icon-button aria-label="Sign out" matTooltip="Sign out" (click)="signOut()">
+        <mat-icon>logout</mat-icon>
+        </button>
+    </span>
   </mat-toolbar>
   

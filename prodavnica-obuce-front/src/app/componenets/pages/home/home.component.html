@@ -23,12 +23,18 @@
         <mat-card-actions>
             <a [routerLink]="['/api/Proizvod', proizvod.id]">
                 <div class="example-button-container">
-                    <button mat-fab extended>
+                    <button mat-fab extended >
                         <mat-icon>info</mat-icon>
-                        Vise detalja
+                        Pregled
                     </button>
                 </div>
             </a>
+            <div class="example-button-container">
+                <button mat-fab extended (click)="addToCart(proizvod)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                    Dodaj u korpu
+                </button>
+            </div>
         </mat-card-actions>
       </mat-card>
 </div>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Proizvod } from '../../../models/Proizvod';
@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -22,13 +23,14 @@ export class HomeComponent {
 
   searchControl = new FormControl('')
 
+  productService = inject(ProductService)
+  cartService = inject(CartService)
   products:Proizvod[]=[];
   filteredProducts: Proizvod[] = [];
   searchText!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(
-    private productService: ProductService) {
+  constructor() {
 
       this.searchControl.valueChanges
       .pipe(
@@ -82,6 +84,10 @@ export class HomeComponent {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     const endIndex = startIndex + this.paginator.pageSize;
     this.filteredProducts = this.products.slice(startIndex, endIndex);
+  }
+
+  addToCart(product: Proizvod) {
+    this.cartService.addToCart(product)
   }
 
 }

@@ -26,10 +26,13 @@ export class AuthService {
   }
 
   saveToken(token: string) {
-    console.log('IN')
     const now = new Date();
     now.setTime(now.getTime() + (10 * 60 * 1000));
     this.cookieService.set('token', token, { expires: now });
+  }
+
+  deleteToken() {
+    this.cookieService.delete('token');
   }
 
   getToken(): string | null {
