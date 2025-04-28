@@ -1,22 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth/auth.service';
+import { Router, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [MatCardModule, MatFormFieldModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatInputModule],
+  imports: [MatCardModule, MatFormFieldModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatInputModule, RouterModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
 
+  authService = inject(AuthService)
+  router = inject(Router)
+  toastr = inject(ToastrService)
+
   constructor(
-    private authService: AuthService
   ) {
 
   }
@@ -32,11 +37,14 @@ export class SignUpComponent {
   });
 
   submit() {
+    this.toastr.success('Uspesna registracija')
+    return
     if (this.form.valid) {
       this.authService.signUp(this.form.value).subscribe(
         {
           next: (val) => {
-            console.log(val)
+            this.toastr.success('Uspesna registracija')
+            this.router.navigate(['/'])
           },
           error: (err) => {
             console.log(err)

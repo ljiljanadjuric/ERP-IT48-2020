@@ -1,0 +1,19 @@
+.container {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .success-card {
+    padding: 30px;
+    max-width: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .success-icon {
+    margin: auto;
+    color: #4CAF50;
+  }

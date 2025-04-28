@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { StavkaKorpe } from '../../../models/StavkaKorpe';
 import { CartService } from '../../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { PaymentService } from '../../../services/payment/payment.service';
+import { Router } from '@angular/router';
+import { StripeService } from '../../../services/payment/stripe.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +21,10 @@ export class CartComponent implements OnInit {
   messageTitle = "No Products Found in Cart";
   messageDescription = "Please, Add Products to Cart";
 
-  constructor(private cartsService: CartService) {}
+  cartsService = inject(CartService)
+  paymentService = inject(PaymentService)
+  stripeService = inject(StripeService)
+  router = inject(Router)
 
   ngOnInit(): void {
     this.productsInCart = this.cartsService.getAll();
@@ -47,4 +53,20 @@ export class CartComponent implements OnInit {
     return sum;
   }
 
+  payCash() {
+    this.paymentService.payCash(this.productsInCart)
+    .subscribe({
+      next: (val) => {
+        this.cartsService.removeAll()
+        this.router.navigate(['/order-successful'])
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  payCard() {
+    this.stripeService.checkout(this.productsInCart)
+  }
 }

@@ -42,17 +42,17 @@
         <div class="container clearfix">
   
           <div class="left">
-            <!-- <h2 class="subtotal">Cena bez popusta: {{ setIznos() }}RSD</h2>
-            <h3 class="tax">Popust : <span>0</span>€</h3> -->
+          
           </div>
   
           <div class="right" *ngIf="productsInCart.length > 0">
             <h1 class="total">Ukupno: <span>{{ getTotal() | currency: 'RSD' }}</span></h1>
-            <a class="btn" routerLink="/Nastavi">
-                <button mat-flat-button>
-                Placanje
-                </button>
-            </a>
+            <button mat-flat-button (click)="payCash()">
+                Placanje cash 
+            </button>
+            <button mat-flat-button style="background-color: red;" (click)="payCard()">
+                Placanje kartica 
+            </button>
           </div>
   
         </div>

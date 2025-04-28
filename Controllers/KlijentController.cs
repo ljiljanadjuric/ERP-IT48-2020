@@ -32,14 +32,26 @@ namespace ProdavnicaObuce.Controllers
             return Ok(proizvodi);
         }
 
-        [HttpPost]
+        [HttpPost("Cash")]
         [Authorize(Roles = "Klijent")]
-        public async Task<IActionResult> KupiProizvode(KupiProizvodDTO kupiProizvodDTO)
+        public async Task<IActionResult> KupiProizvodeKes(KupiProizvodDTO kupiProizvodDTO)
         {
             if (!int.TryParse(User.Claims.First(c => c.Type == "Id").Value, out int userId))
                 throw new Exception("Bad ID. Logout and login.");
-            await _klijentServis.KupiProizvode(kupiProizvodDTO, userId);
+            await _klijentServis.KupiProizvodeKes(kupiProizvodDTO, userId);
             return Ok();
+        }
+
+        [HttpPost("Card")]
+        [Authorize(Roles = "Klijent")]
+        public async Task<ActionResult<CardPaymentDto>> KupiProizvodeKartica(KupiProizvodDTO kupiProizvodDTO)
+        {
+            if (!int.TryParse(User.Claims.First(c => c.Type == "Id").Value, out int userId))
+                throw new Exception("Bad ID. Logout and login.");
+            var sessionKey = await _klijentServis.KupiProizvodeKartica(kupiProizvodDTO, userId);
+            return Ok(new CardPaymentDto {
+                SessionId = sessionKey
+            });
         }
     }
 }

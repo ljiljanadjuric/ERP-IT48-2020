@@ -48,4 +48,9 @@ export class CartService {
     this.cartItems = this.cartItems.filter(x => x.proizvod.id !== product.id);
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
+
+  removeAll() {
+    this.cartItems = []
+    localStorage.removeItem('cart')
+  }
 }
