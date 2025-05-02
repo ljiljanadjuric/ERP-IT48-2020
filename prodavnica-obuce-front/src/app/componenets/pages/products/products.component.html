@@ -1,0 +1,39 @@
+<div>
+    <button mat-raised-button color="primary" (click)="addNew()">Dodaj Proizvod</button>
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let p"> {{p.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="ime">
+      <th mat-header-cell *matHeaderCellDef> Ime </th>
+      <td mat-cell *matCellDef="let p"> {{p.ime}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="brend">
+      <th mat-header-cell *matHeaderCellDef> Brend </th>
+      <td mat-cell *matCellDef="let p"> {{p.brend}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="boja">
+        <th mat-header-cell *matHeaderCellDef> Boja </th>
+        <td mat-cell *matCellDef="let p"> {{p.boja}} </td>
+      </ng-container>
+  
+    <ng-container matColumnDef="prodajnaCena">
+      <th mat-header-cell *matHeaderCellDef> Cena </th>
+      <td mat-cell *matCellDef="let p"> {{p.prodajnaCena}} RSD </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="kolicina">
+      <th mat-header-cell *matHeaderCellDef> Količina </th>
+      <td mat-cell *matCellDef="let p"> {{p.kolicina}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

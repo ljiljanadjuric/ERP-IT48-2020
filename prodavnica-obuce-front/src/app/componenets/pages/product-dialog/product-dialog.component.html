@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ data?.id ? 'Izmeni Proizvod' : 'Dodaj Proizvod' }}</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field class="full-width">
+    <mat-label>Ime</mat-label>
+    <input matInput formControlName="ime">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Brend</mat-label>
+    <input matInput formControlName="brend">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Boja</mat-label>
+    <input matInput formControlName="boja">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Cena</mat-label>
+    <input type="number" matInput formControlName="prodajnaCena">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Količina</mat-label>
+    <input type="number" matInput formControlName="kolicina">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Otkaži</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Sačuvaj</button>
+</mat-dialog-actions>

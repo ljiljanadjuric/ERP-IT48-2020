@@ -32,7 +32,11 @@ export class SignInComponent {
         {
           next: (response: any) => {
             this.authService.saveToken(response.token);
-            window.location.href = '/'
+            this.authService.saveRole(response.role);
+            if (response.role === 'Admin') {
+              window.location.href = '/products'
+            } else 
+              window.location.href = '/'
           },
           error: (err) => {
             console.log(err)

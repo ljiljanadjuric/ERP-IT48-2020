@@ -4,6 +4,7 @@ export interface Proizvod{
     prodajnaCena:number,
     kolicina:number,
     ime: string,
-    brend: string
+    brend: string,
+    boja: string
   }
   

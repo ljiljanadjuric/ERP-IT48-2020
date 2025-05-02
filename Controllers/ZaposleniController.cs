@@ -43,7 +43,7 @@ namespace ProdavnicaObuce.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost("proizvodi")]
-        public async Task<IActionResult> DodajProizvod([FromForm] KreirajProizvodDTO kreirajProizvodDTO)
+        public async Task<IActionResult> DodajProizvod([FromBody] KreirajProizvodDTO kreirajProizvodDTO)
         {
             if (!int.TryParse(User.Claims.First(c => c.Type == "Id").Value, out int userId))
                 throw new Exception("Bad ID. Logout and login.");

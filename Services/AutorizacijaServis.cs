@@ -64,7 +64,8 @@ namespace ProdavnicaObuce.Services
             var token = GetToken(korisnik);
             return new LoginResponseDto
             {
-                Token = token
+                Token = token,
+                Role = korisnik.Tip.ToString()
             };
         }
     }

@@ -6,6 +6,11 @@
     </a>
     <span>Prodavnica obuce</span>
     <span class="example-spacer"></span>
+    <a [routerLink]="'/products'" *ngIf="isAdmin">
+        <button mat-icon-button aria-label="products" matTooltip="Proizvodi">
+        <mat-icon>inventory</mat-icon>
+        </button>
+    </a>
     <a [routerLink]="'/sign-in'" *ngIf="!isLogged">
         <button mat-icon-button aria-label="Sign in" matTooltip="Login">
         <mat-icon>login</mat-icon>
@@ -16,7 +21,7 @@
         <mat-icon>app_registration</mat-icon>
         </button>
     </a>
-    <a [routerLink]="'cart'" *ngIf="isLogged">
+    <a [routerLink]="'cart'" *ngIf="isLogged && !isAdmin">
         <button mat-icon-button aria-label="Car" matTooltip="Cart">
         <mat-icon>shopping_cart</mat-icon>
         </button>

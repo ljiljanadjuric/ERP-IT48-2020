@@ -19,16 +19,21 @@ export class NavbarComponent implements OnInit {
   authService = inject(AuthService);
   searchText = ''
   isLogged = false
+  isAdmin = false;
 
   ngOnInit(): void {
     const token = this.authService.getToken()
-    if (token) this.isLogged = true;
+    if (token) {
+      this.isLogged = true;
+      if (this.authService.getRole() === 'Admin') {
+        this.isAdmin = true;
+      }
+    }
   }
 
   signOut() {
     this.authService.deleteToken()
-    console.log(window.location.pathname)
-    if (window.location.pathname === '/')
-    window.location.href = '/'
+    this.authService.deleteRole()
+      window.location.href = '/'
   }
 }
