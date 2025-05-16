@@ -17,9 +17,18 @@ export class StripeService {
   }
 
   async checkout(cartItems: StavkaKorpe[]) {
+    const body = {
+      stavkeProdaje: cartItems.map(x => {
+        return {
+          idProizvoda: x.proizvod.id,
+          kolicina: x.kolicina
+        }
+      }),
+      nacinPlacanja: 1
+    }
 
     const stripe = await this.stripe;
-    this.http.post<{ sessionId: string }>(`${this.apiUrl}/api/Klijent/Card`, {})
+    this.http.post<{ sessionId: string }>(`${this.apiUrl}/api/Klijent/Card`, body)
       .subscribe(async response => {
         if (stripe) {
           await stripe.redirectToCheckout({ sessionId: response.sessionId });

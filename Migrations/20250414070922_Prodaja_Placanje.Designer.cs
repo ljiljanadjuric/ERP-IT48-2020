@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProdavnicaObuce.Settings;
 
@@ -11,9 +12,11 @@ using ProdavnicaObuce.Settings;
 namespace ProdavnicaObuce.Migrations
 {
     [DbContext(typeof(ProdavnicaDbContext))]
-    partial class ProdavnicaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250414070922_Prodaja_Placanje")]
+    partial class Prodaja_Placanje
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

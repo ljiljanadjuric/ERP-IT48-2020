@@ -12,6 +12,7 @@ namespace ProdavnicaObuce.Models
         public double CenaProdaje { get; set; }
         [Required]
         public NacinPlacanja NacinPlacanja { get; set; }
+        public bool Placeno { get; set; }
         public int IdKupca { get; set; }
         public virtual Korisinik? Kupac { get; set; }
 

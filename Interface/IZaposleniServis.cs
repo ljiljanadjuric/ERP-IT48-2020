@@ -1,4 +1,5 @@
 ﻿using ProdavnicaObuce.DTOs;
+using ProdavnicaObuce.Models;
 
 namespace ProdavnicaObuce.Interface
 {
@@ -11,5 +12,6 @@ namespace ProdavnicaObuce.Interface
         public Task<List<PorudzbinaStanjeDTO>> PregledajSvePorudzbine();
         public Task<List<PorudzbinaStanjeDTO>> PregledajPorudzbineKojeCekajuDaSePreuzmu();
         public Task PreuzmiPorudzbinu(int idPorudzbine);
+        Task<List<ProdajaDto>> PregledajSveProdaje();
     }
 }

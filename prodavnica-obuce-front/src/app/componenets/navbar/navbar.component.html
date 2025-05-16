@@ -11,6 +11,11 @@
         <mat-icon>inventory</mat-icon>
         </button>
     </a>
+    <a [routerLink]="'/orders'" *ngIf="isAdmin">
+        <button mat-icon-button aria-label="orders" matTooltip="Porudzbine">
+        <mat-icon>money_bag</mat-icon>
+        </button>
+    </a>
     <a [routerLink]="'/sign-in'" *ngIf="!isLogged">
         <button mat-icon-button aria-label="Sign in" matTooltip="Login">
         <mat-icon>login</mat-icon>

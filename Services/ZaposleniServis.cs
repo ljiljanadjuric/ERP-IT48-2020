@@ -53,6 +53,7 @@ namespace ProdavnicaObuce.Services
                     throw new Exception("Proizvod ne postoji!");
                 }
                 proizvodi.Add(proizvod);
+                proizvod.Kolicina -= stavkaPorudzbine.Kolicina;
             }
             porudzbina.StavkePorudzbine.ForEach(s => s.IdPorudzbine = porudzbina.Id);
             porudzbina.VremePorudzbe = DateTime.Now;
@@ -75,6 +76,20 @@ namespace ProdavnicaObuce.Services
         {
             var poruzbine = await _unitOfWork.Porudzbine.GetAll();
             return _mapper.Map<List<PorudzbinaStanjeDTO>>(poruzbine);
+        }
+
+        public async Task<List<ProdajaDto>> PregledajSveProdaje()
+        {
+            var prodaje = await _unitOfWork.Prodaje.GetAll();
+            return prodaje.Select(x => new ProdajaDto
+            {
+                Id = x.Id,
+                VremeProdaje = x.VremeProdaje,
+                CenaProdaje = x.CenaProdaje,
+                Kupac = x.Kupac.Ime + " " + x.Kupac.Prezime,
+                NacinPlacanja = x.NacinPlacanja.ToString(),
+                Placeno = x.Placeno,
+            }).ToList();
         }
 
         public async Task PreuzmiPorudzbinu(int idPorudzbine)

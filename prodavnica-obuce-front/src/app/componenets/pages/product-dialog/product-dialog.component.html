@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ data?.id ? 'Izmeni Proizvod' : 'Dodaj Proizvod' }}</h2>
+<h2 mat-dialog-title>{{ data.id !== null ? 'Izmeni Proizvod' : 'Dodaj Proizvod' }}</h2>
 <mat-dialog-content [formGroup]="form">
   <mat-form-field class="full-width">
     <mat-label>Ime</mat-label>

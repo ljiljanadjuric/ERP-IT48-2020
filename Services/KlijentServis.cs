@@ -60,6 +60,8 @@ namespace ProdavnicaObuce.Services
             prodaja.IdKupca = idKupca;
             prodaja.VremeProdaje = DateTime.Now;
             double cena = 0;
+
+            var dict = new Dictionary<int, Proizvod>();
             foreach (var p in kupiProizvodDTO.StavkeProdaje)
             {
                 var proizvod = await _unitOfWork.Proizvodi.GetById(p.IdProizvoda);
@@ -73,6 +75,7 @@ namespace ProdavnicaObuce.Services
                 }
                 proizvod.Kolicina -= p.Kolicina;
                 cena += proizvod.ProdajnaCena;
+                dict.Add(proizvod.Id, proizvod);
             }
             await _unitOfWork.Proizvodi.Save();
             prodaja.CenaProdaje = cena;
@@ -85,25 +88,28 @@ namespace ProdavnicaObuce.Services
             var options = new SessionCreateOptions
             {
                 PaymentMethodTypes = new List<string> { "card" },
-                LineItems = new List<SessionLineItemOptions>
-        {
-            new SessionLineItemOptions
-            {
-                PriceData = new SessionLineItemPriceDataOptions
-                {
-                    Currency = "usd",
-                    UnitAmount = 2000, // $20.00
-                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                LineItems = kupiProizvodDTO.StavkeProdaje.Select(x =>
+                    new SessionLineItemOptions
                     {
-                        Name = "Example Product"
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            Currency = "rsd",
+                            UnitAmount = (long)dict[x.IdProizvoda].ProdajnaCena * 100,
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = dict[x.IdProizvoda].Ime
+                            }
+                        },
+                        Quantity = x.Kolicina
                     }
-                },
-                Quantity = 1
-            }
-        },
+                ).ToList(),
                 Mode = "payment",
                 SuccessUrl = "http://localhost:4200/payment-successful",
-                CancelUrl = "http://localhost:4200/"
+                CancelUrl = "http://localhost:4200/",
+                Metadata = new Dictionary<string, string>
+                {
+                    { "order_id", prodaja.Id.ToString() }
+                }
             };
 
             var service = new SessionService();

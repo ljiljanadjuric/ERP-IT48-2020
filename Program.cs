@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProdavnicaObuce.HostedServices;
 using ProdavnicaObuce.Interface;
 using ProdavnicaObuce.Mapper;
 using ProdavnicaObuce.Services;
@@ -78,6 +79,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddCors();
 builder.Services.AddAuthorization();
+builder.Services.AddHostedService<ProdajaCleanupHostedService>();
 
 var app = builder.Build();
 

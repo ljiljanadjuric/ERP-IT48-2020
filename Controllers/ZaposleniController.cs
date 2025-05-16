@@ -25,6 +25,14 @@ namespace ProdavnicaObuce.Controllers
             return Ok(proizvodi);
         }
 
+        [HttpGet("prodaje")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PregledajSveProdaje()
+        {
+            var prodaje = await _zaposleniServis.PregledajSveProdaje();
+            return Ok(prodaje);
+        }
+
         [HttpGet("porudzbine")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PregledajSvePorudzbine()
