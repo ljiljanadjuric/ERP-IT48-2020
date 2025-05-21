@@ -1,3 +1,11 @@
+<div class="loader-overlay" *ngIf="isLoading">
+  <mat-progress-spinner
+    mode="indeterminate"
+    diameter="60"
+    color="primary"
+  ></mat-progress-spinner>
+</div>
+
 <div>
     <button mat-raised-button color="primary" (click)="addNew()">Dodaj Proizvod</button>
   </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { StavkaKorpe } from '../../models/StavkaKorpe';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class StripeService {
   private stripe: Promise<Stripe | null>;
   private apiUrl = 'https://localhost:4430';
   http = inject(HttpClient)
+  toastr = inject(ToastrService)
 
   constructor() {
     this.stripe = loadStripe('pk_test_51R9ie5DOf3Orfno9SwtRSOn8DnPKxVsuhc3YGJRx2UuBIspRvqnTonFjTNCwxMBSkCrgOpx15DzSrNPDdRBNAtHb0047KubRlp');
@@ -33,6 +35,8 @@ export class StripeService {
         if (stripe) {
           await stripe.redirectToCheckout({ sessionId: response.sessionId });
         }
+      }, err => {
+        this.toastr.error('Porudzina nije sacuvana.')
       });
   }
 }

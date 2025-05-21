@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { PaymentService } from '../../../services/payment/payment.service';
 import { Router } from '@angular/router';
 import { StripeService } from '../../../services/payment/stripe.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -25,6 +26,7 @@ export class CartComponent implements OnInit {
   paymentService = inject(PaymentService)
   stripeService = inject(StripeService)
   router = inject(Router)
+  toastr = inject(ToastrService)
 
   ngOnInit(): void {
     this.productsInCart = this.cartsService.getAll();
@@ -62,6 +64,7 @@ export class CartComponent implements OnInit {
       },
       error: (err) => {
         console.log(err)
+        this.toastr.error('Porudzina nije sacuvana.')
       }
     })
   }

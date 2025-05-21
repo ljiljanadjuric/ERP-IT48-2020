@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <a [routerLink]="'/'" >
+    <a [routerLink]="'/'" *ngIf="!isAdmin">
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>home</mat-icon>
         </button>

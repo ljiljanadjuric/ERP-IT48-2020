@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,11 +16,8 @@ import { AuthService } from '../../../services/auth/auth.service';
 })
 export class SignInComponent {
 
-  constructor(
-    private authService: AuthService
-  ) {
-
-  }
+  authService = inject(AuthService)
+  toastr = inject(ToastrService)
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,7 +37,7 @@ export class SignInComponent {
               window.location.href = '/'
           },
           error: (err) => {
-            console.log(err)
+            this.toastr.error('Neispravni kredencijali')
           }
         }
       )

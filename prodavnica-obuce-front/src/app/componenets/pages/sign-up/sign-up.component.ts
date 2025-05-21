@@ -21,11 +21,6 @@ export class SignUpComponent {
   router = inject(Router)
   toastr = inject(ToastrService)
 
-  constructor(
-  ) {
-
-  }
-
   form: FormGroup = new FormGroup({
     korisnickoIme: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -37,8 +32,6 @@ export class SignUpComponent {
   });
 
   submit() {
-    this.toastr.success('Uspesna registracija')
-    return
     if (this.form.valid) {
       this.authService.signUp(this.form.value).subscribe(
         {
@@ -47,7 +40,7 @@ export class SignUpComponent {
             this.router.navigate(['/'])
           },
           error: (err) => {
-            console.log(err)
+            this.toastr.error('Koristite postojece korisnicko ime ili imejl')
           }
         }
       )

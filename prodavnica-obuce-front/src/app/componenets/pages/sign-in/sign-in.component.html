@@ -8,8 +8,8 @@
                 </mat-form-field>
 
                 <div class="error" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
-                    <span *ngIf="form.controls['email'].errors?.['required']">Email is required.</span>
-                    <span *ngIf="form.controls['email'].errors?.['email']">Wrong format.</span>
+                    <span *ngIf="form.controls['email'].errors?.['required']">Email je obavezno polje.</span>
+                    <span *ngIf="form.controls['email'].errors?.['email']">Pogresan format.</span>
                  </div>
             </div>
 
@@ -20,7 +20,7 @@
                 </mat-form-field>
 
                 <div class="error" *ngIf="form.controls['sifra'].invalid && form.controls['sifra'].touched">
-                    <span *ngIf="form.controls['sifra'].errors?.['required']">Password is required.</span>
+                    <span *ngIf="form.controls['sifra'].errors?.['required']">Password je obavezno polje.</span>
                  </div>
             </div>
 

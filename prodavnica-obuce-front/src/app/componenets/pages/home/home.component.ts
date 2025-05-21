@@ -12,10 +12,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../../services/cart/cart.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
-  imports: [MatCardModule, MatPaginatorModule, RouterModule, CommonModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatCardModule, MatPaginatorModule, RouterModule, CommonModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -25,9 +27,11 @@ export class HomeComponent {
 
   productService = inject(ProductService)
   cartService = inject(CartService)
+  toastr = inject(ToastrService)
   products:Proizvod[]=[];
   filteredProducts: Proizvod[] = [];
   searchText!: string;
+  isLoading = true
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
@@ -41,6 +45,7 @@ export class HomeComponent {
       .subscribe(products => {
         this.products = products;
         this.filteredProducts = this.products;
+        this.isLoading = false;
         this.updatePagination();
       });
   }
@@ -53,6 +58,7 @@ export class HomeComponent {
         this.products=successResponse;
         this.filteredProducts = this.products;
         this.updatePagination();
+        this.isLoading = false;
       },
       error: (error) => {
         console.log(error)
@@ -62,6 +68,7 @@ export class HomeComponent {
   }
 
   fetchFilteredProducts(searchText:string | null) {
+    this.isLoading = true;
     if (searchText)
       return this.productService.getFiltriraniProizvodi(searchText);
     else 
@@ -88,6 +95,7 @@ export class HomeComponent {
 
   addToCart(product: Proizvod) {
     this.cartService.addToCart(product)
+    this.toastr.success(product.ime + ' je dodat u korpu')
   }
 
 }
