@@ -13,25 +13,25 @@
       <div class="container">
   
         <section id="cart">
-          <article class="product" *ngFor="let productIC of productsInCart">
+          <article class="product" *ngFor="let productInCart of productsInCart">
             <header>
-              <a class="remove" (click)="removeProduct(productIC)">
-                <img [src]="'images/img1.webp'">
+              <a class="remove" (click)="removeProduct(productInCart)">
+                <img [src]="'/images/' + productInCart.proizvod.slika">
                 <h3>Remove product</h3>
               </a>
             </header>
             <div class="content">
-              <h1>{{ productIC.proizvod.ime}}</h1>
+              <h1>{{ productInCart.proizvod.ime}}</h1>
             </div>
             <footer class="content">
-              <button class="qt-minus" (click)="decrementQuantity(productIC)">-</button>
-              <span class="qt" >{{ productIC.kolicina }}</span>
-              <button class="qt-plus" (click)="incrementQuantity(productIC)">+</button>
+              <button class="qt-minus" (click)="decrementQuantity(productInCart)">-</button>
+              <span class="qt" >{{ productInCart.kolicina }}</span>
+              <button class="qt-plus" (click)="incrementQuantity(productInCart)">+</button>
               <h2 class="full-price" >
-                {{ productIC.kolicina * productIC.proizvod.prodajnaCena | currency: 'RSD' }}    
+                {{ productInCart.kolicina * productInCart.proizvod.prodajnaCena | currency: 'RSD' }}    
               </h2>
               <h2 class="price" >
-                {{productIC.proizvod.prodajnaCena | currency: 'RSD'}}
+                {{productInCart.proizvod.prodajnaCena | currency: 'RSD'}}
               </h2>
             </footer>
           </article>

@@ -22,20 +22,12 @@
           <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
         </mat-card-header>
         <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-        <img mat-card-image [src]="'/images/img1.webp'" >
+        <img mat-card-image [src]="'/images/' + proizvod.slika" >
         <mat-card-content>
             <div class="cena">Cena: {{ proizvod.prodajnaCena }} RSD</div>
             <h3>Brend proizvoda: {{ proizvod.brend}}</h3>
         </mat-card-content>
         <mat-card-actions>
-            <a [routerLink]="['/api/Proizvod', proizvod.id]">
-                <div class="example-button-container">
-                    <button mat-fab extended >
-                        <mat-icon>info</mat-icon>
-                        Pregled
-                    </button>
-                </div>
-            </a>
             <div class="example-button-container">
                 <button mat-fab extended (click)="addToCart(proizvod)">
                     <mat-icon>add_shopping_cart</mat-icon>

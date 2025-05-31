@@ -28,6 +28,8 @@ namespace ProdavnicaObuce.Models
         public string Boja { get; set; } = String.Empty;
         [Required]
         public string Brend { get; set; } = String.Empty;
+        [Required]
+        public string Slika { get; set; } = String.Empty;
 
         public virtual List<StavkaProdaje>? StavkeProdaje { get; set; }
         public virtual List<StavkaPorudzbine>? StavkePorudzbine { get; set; }

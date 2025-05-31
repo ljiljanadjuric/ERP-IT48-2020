@@ -15,5 +15,7 @@ namespace ProdavnicaObuce.DTOs
         public string Boja { get; set; } = String.Empty;
         [Required]
         public string Brend { get; set; } = String.Empty;
+        [Required]
+        public string Slika { get; set; } = String.Empty;
     }
 }

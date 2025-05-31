@@ -28,7 +28,8 @@ export class ProductDialogComponent {
       brend: [data?.brend || '', Validators.required],
       boja: [data?.boja || '', Validators.required],
       prodajnaCena: [data?.prodajnaCena || 0, [Validators.required, Validators.min(0)]],
-      kolicina: [data?.kolicina || 0, [Validators.required, Validators.min(0)]]
+      kolicina: [data?.kolicina || 0, [Validators.required, Validators.min(0)]],
+      slika: [data?.slika || 0, [Validators.required, Validators.min(0)]]
     });
   }
 

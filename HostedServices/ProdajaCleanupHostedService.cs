@@ -28,8 +28,8 @@ namespace ProdavnicaObuce.HostedServices
                 try
                 {
                     Console.WriteLine($"Running at {DateTime.Now}");
-                    await dbContext.StavkeProdaje.Where(x => x.Prodaja.NacinPlacanja == NacinPlacanja.Kartica && !x.Prodaja.Placeno && x.Prodaja.VremeProdaje < DateTime.Now.AddMinutes(-10)).ExecuteDeleteAsync(stoppingToken);
-                    await dbContext.Prodaje.Where(x => x.NacinPlacanja == NacinPlacanja.Kartica && !x.Placeno && x.VremeProdaje < DateTime.Now.AddMinutes(-10)).ExecuteDeleteAsync(stoppingToken);
+                    await dbContext.StavkeProdaje.Where(x => x.Prodaja.NacinPlacanja == NacinPlacanja.Kartica && !x.Prodaja.Placeno && x.Prodaja.VremeProdaje < DateTime.Now.AddMinutes(-1)).ExecuteDeleteAsync(stoppingToken);
+                    await dbContext.Prodaje.Where(x => x.NacinPlacanja == NacinPlacanja.Kartica && !x.Placeno && x.VremeProdaje < DateTime.Now.AddMinutes(-1)).ExecuteDeleteAsync(stoppingToken);
                 }
                 catch (Exception ex)
                 {

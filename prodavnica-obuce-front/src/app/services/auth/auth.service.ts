@@ -27,13 +27,13 @@ export class AuthService {
 
   saveToken(token: string) {
     const now = new Date();
-    now.setTime(now.getTime() + (10 * 60 * 1000));
+    now.setTime(now.getTime() + (5 * 60 * 1000));
     this.cookieService.set('token', token, { expires: now });
   }
 
   saveRole(role: any) {
     const now = new Date();
-    now.setTime(now.getTime() + (10 * 60 * 1000));
+    now.setTime(now.getTime() + (5 * 60 * 1000));
     this.cookieService.set('role', role, { expires: now });
   }
 

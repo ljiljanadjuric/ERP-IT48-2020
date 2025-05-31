@@ -5,6 +5,7 @@ export interface Proizvod{
     kolicina:number,
     ime: string,
     brend: string,
-    boja: string
+    boja: string,
+    slika: string,
   }
   
